@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Helpers\InfusionsoftHelper;
 use Request;
+use Illuminate\Http\Request as httpRequest;
 use Storage;
 use Response;
 
@@ -42,5 +43,17 @@ class InfusionsoftController extends Controller
             'Email' => uniqid().'@test.com',
             "_Products" => 'ipa,iea'
         ]));
+    }
+    public function testInfusionsoftIntegrationCreateContactByEmail(httpRequest $request){
+        if($request->has('contact_email')){
+            $infusionsoft = new InfusionsoftHelper();
+
+            return Response::json($infusionsoft->createContact([
+                'Email' => $request->input('contact_email'),
+                "_Products" => 'ipa,iea'
+            ]));
+        }
+        else
+            return Response::json(['success' => false, 'message' => 'Contact Email was not given, please verify your request information.']);
     }
 }
