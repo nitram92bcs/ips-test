@@ -13,3 +13,5 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::post('/module_reminder_assigner','ReminderController@moduleAssigner')->name('api.module_reminder_assigner');
+Route::post('/infusionsoft_test_create_contact_by_email', 'InfusionsoftController@testInfusionsoftIntegrationCreateContactByEmail');
